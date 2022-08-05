@@ -49,9 +49,6 @@ def show_playlist(playlist_id):
     form = PlaylistForm()
 
     if form.validate_on_submit():
-        name = form.name.data
-        id = form.id.data
-        description = form.description.data
         return redirect('/playlists/<int:playlist_id>')
 
     else:
@@ -73,17 +70,12 @@ def add_playlist():
     """
     form = PlaylistForm()
     
-    return render_template("new_playlist.html", form=form)
+    if form.validate_on_submit():
+        return redirect('playlists.html')
 
-
-    # if form.validate_on_submit():
-    #     name = form.name.data
-    #     description = form.description.data
-    #     id = form.id.data
-    #     return redirect('playlists.html')
-
-    # else:
-    #     return render_template('new_playlist.html')
+    else:
+        return render_template('new_playlist.html', form=form)
+        
     # ADD THE NECESSARY CODE HERE FOR THIS ROUTE TO WORK
 
 
